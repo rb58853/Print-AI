@@ -1,6 +1,5 @@
 import os
 
-
 class ConfigGPT:
     MODEL_PRICE = {
         "gpt-3.5-turbo": {
@@ -16,3 +15,6 @@ class ConfigGPT:
     DEFAULT_MODEL_NAME = "gpt-4o-mini"
 
     OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+
+class WeatherDataConfig:
+    API_KEY = os.environ.get("WHEATHERDATA_API_KEY")

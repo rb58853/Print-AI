@@ -1,9 +1,8 @@
 from src.app.openai_.gpt import GPT
-from data.data import info
 
 
 class Chat:
-    def __init__(self, gpt: GPT = GPT(info=info)) -> None:
+    def __init__(self, gpt: GPT = GPT()) -> None:
         self.gpt: GPT = gpt
         self.history = []
         self.max_history_len = 5
