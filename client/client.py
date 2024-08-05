@@ -22,12 +22,7 @@ class APIClient:
                     query = input("> ")
                     await websocket.send(query)
                     response = await asyncio.wait_for(websocket.recv(), timeout=100)
-
-                    try:
-                        response = json.loads(response)
-                        print(f"< {response['response']}")
-                    except:
-                        print(f"< {response}")
+                    print(f"< {response}")
 
                 except Exception as e:
                     logging.error(e)

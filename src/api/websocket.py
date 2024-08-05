@@ -8,7 +8,7 @@ import json
 async def websocket_endpoint(websocket: WebSocket):
     try:
         await websocket.accept()
-        await websocket.send_text(f"connected")
+        # await websocket.send_text(f"connected")
 
     except Exception as e:
         logging.error(f"websocket.accept failed: {e}")
@@ -21,14 +21,15 @@ async def websocket_endpoint(websocket: WebSocket):
             logging.info(f"waiting query from user")
             try:
                 query = await websocket.receive_text()
-                await chat.send_query(query)
+                response = await chat.send_query(query)
+                #  chat.process_query(query)
+                await websocket.send_text(response)
+
             except:
                 logging.warning("internal server error")
-                response = {
-                    "response": "internal server error, try resend your question",
-                    "products": [],
-                }
-                await websocket.send_text(json.dumps(response))
+                await websocket.send_text(
+                    json.dumps("internal server error, try resend your question")
+                )
 
     except Exception as e:
         logging.error(str(e))
