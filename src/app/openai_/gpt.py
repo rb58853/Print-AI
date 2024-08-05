@@ -14,16 +14,12 @@ class GPT:
 
     def __init__(
         self,
-        info,
         model=ConfigGPT.DEFAULT_MODEL_NAME,
     ):
         self.client = OpenAI(api_key=ConfigGPT.OPENAI_API_KEY)
         self.asyncclient = AsyncOpenAI(api_key=ConfigGPT.OPENAI_API_KEY)
         self.model = model
         self.current_price = 0
-
-    def identifique_query(self, history):
-        pass
 
     def api_call(self, history, system_message, json_format=False):
         messages = [item for item in history]
@@ -33,7 +29,9 @@ class GPT:
             self.client.chat.completions.create(model=self.model, messages=messages)
             if not json_format
             else self.client.chat.completions.create(
-                model=self.model, messages=messages
+                model=self.model,
+                messages=messages,
+                response_format={"type": "json_object"},
             )
         )
 
@@ -41,12 +39,12 @@ class GPT:
         message = completion.choices[0].message.content
         return message
 
-    def get_weather(self, history):
+    def get_location(self, history):
         system_message = get_weather_info()
-        return self.api_call(history, system_message)
+        return json.loads(self.api_call(history, system_message, json_format=True))
 
     def information(self, history, info):
-        system_message = weather_info(info=info)
+        system_message = json.dumps(weather_info(info=info))
         return self.api_call(history, system_message)
 
     def reload_price(self):
