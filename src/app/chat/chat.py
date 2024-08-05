@@ -10,7 +10,7 @@ class Chat:
         self.weather = weather_data
 
     async def send_query(self, query):
-        pass
+        return self.process_query(query)
 
     def process_query(self, query):
         self.history.append({"role": "user", "content": query})
