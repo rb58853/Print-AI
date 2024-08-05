@@ -19,7 +19,7 @@ class ConfigGPT:
 
 
 class WeatherDataConfig:
-    API_KEY = os.environ.get("WHEATHERDATA_API_KEY")
+    API_KEY = os.environ.get("WEATHERDATA_API_KEY")
 
     # Estos son los campos basicos que se usaran identico a como estan en la data
     BASIC_USABLE_FIELDS = ["weather", "clouds", "wind", "visibility"]
