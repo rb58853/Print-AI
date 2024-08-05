@@ -44,7 +44,7 @@ class GPT:
         return json.loads(self.api_call(history, system_message, json_format=True))
 
     def information(self, history, info):
-        system_message = json.dumps(weather_info(info=info))
+        system_message = weather_info(json.dumps(info))
         return self.api_call(history, system_message)
 
     def reload_price(self):

@@ -3,7 +3,6 @@ from src.app.chat.chat import Chat
 import logging
 import json
 
-
 @app.websocket("/ws/chat")
 async def websocket_endpoint(websocket: WebSocket):
     try:

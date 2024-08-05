@@ -19,7 +19,7 @@ class Chat:
         location = self.gpt.get_location(self.history)
         country, city = location["country"].lower(), location["location"].lower()
 
-        info = self.weather.get_and_decode_data(city=city, country=country)
+        info = {city: self.weather.get_and_decode_data(city=city, country=country)}
 
         response = self.gpt.information(self.history, info=info)
         self.history.append({"role": "assistant", "content": response})
